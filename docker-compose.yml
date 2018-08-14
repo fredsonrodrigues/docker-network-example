@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+    node-1:
+      build: ./api
+      ports:
+        - 8080
+      networks: 
+        - superweb
+
+    node-2:
+      build: ./api
+      ports:
+        - 8080
+      networks: 
+        - superweb
+
+    nginx:
+      build: ./nginx
+      depends_on: 
+        - node-1
+        - node-2
+      networks: 
+        - superweb
+      ports:
+        - 8080:8080
+networks:
+  superweb:
+    driver: bridge
