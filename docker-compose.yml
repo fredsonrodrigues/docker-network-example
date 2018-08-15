@@ -3,17 +3,15 @@ version: '3'
 services:
     node-1:
       build: ./api
-      ports:
-        - 8080
       networks: 
         - superweb
+      container_name: node-1
 
     node-2:
       build: ./api
-      ports:
-        - 8080
       networks: 
         - superweb
+      container_name: node-2
 
     nginx:
       build: ./nginx
@@ -23,7 +21,8 @@ services:
       networks: 
         - superweb
       ports:
-        - 8080:8080
+        - 8082:8080
+      container_name: ngnix
 networks:
   superweb:
     driver: bridge
